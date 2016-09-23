@@ -1,6 +1,52 @@
 #!/bin/bash
 
-echo "Hello World!"
-echo "The project just started."
+function exitP(){
+case $1 in
+  0 )
+    return 0
+;;
+  4 )
+    echo "Complete! Program is now finished."
+;;
+esac
+}
+
+function initVariables(){
+
+}
+
+function loadOption(){
+
+}
+
+function main(){
+echo "Hello! This project is not released, nothing will work for now."
+exitP 4
+}
+
+function installServer(){
+local installopt=""
+quickmcs-install $installopt
+}
+
+function convertServer(){
+local convertopt=""
+quickmcs-convert $convertopt
+}
+
+function duplicateServer(){
+local duplicateopt=""
+quickmcs-duplicate $duplicateopt
+}
+
+function removeServer(){
+local removeopt=""
+quickmcs-remove $removeopt
+}
+
+main
+
 
 exit 0
+
+

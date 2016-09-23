@@ -1,4 +1,4 @@
 # Quick Minecraft Server
-A bash tool for deploying a minecraft server on Linux
+A quick shell-based tool for minecraft server cluster managing.
 
 Still working on, nothing is functional for now.
