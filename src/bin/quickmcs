@@ -12,39 +12,53 @@ esac
 }
 
 function initVariables(){
-
+return 0
 }
 
 function loadOption(){
-
+return 0
 }
 
 function main(){
-echo "Hello! This project is not released, nothing will work for now."
-exitP 4
+opt_Overall=$*
+
+case $1 in
+  "install" )
+    installServer $opt_Overall
+;;
+  "convert" )
+    convertServer $opt_Overall
+;;
+  "duplicate" )
+    duplicateServer $opt_Overall
+;;
+  "remove" )
+    removeServer $opt_Overall
+;;
+esac
 }
 
 function installServer(){
-local installopt=""
+local installopt=$*
 quickmcs-install $installopt
 }
 
 function convertServer(){
-local convertopt=""
+local convertopt=$*
 quickmcs-convert $convertopt
 }
 
 function duplicateServer(){
-local duplicateopt=""
+local duplicateopt=$*
 quickmcs-duplicate $duplicateopt
 }
 
 function removeServer(){
-local removeopt=""
+local removeopt=$*
 quickmcs-remove $removeopt
 }
 
-main
+main $*
 
 
 exit 0

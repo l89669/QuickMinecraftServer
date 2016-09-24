@@ -1,7 +1,16 @@
 #!/bin/bash
 
-function loadOptions(){
+RUNPATH="/home/project/QuickMinecraftServer/src/bin"
+source ${RUNPATH}/quickmcslib
 
+
+
+function loadOptions(){
+local config="/home/Minecraft/Server/TBC/config.yml"
+local HOST_PATTRN="  host: "
+local hostArray=(`grep "$HOST_PATTRN" $config | sed 's/ //g;s/:/ /g'`)
+ip=${hostArray[1]}
+port=${hostarray[2]}
 }
 
 function main(){
