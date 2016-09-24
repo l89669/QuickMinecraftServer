@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/bin/env bash
 
-RUNPATH="/home/project/QuickMinecraftServer/src/bin"
-source ${RUNPATH}/quickmcslib
-
+if [[ x$ROOTPATH = "x" ]] then
+  unset tmp
+  tmp=${ROOTPATH=x}
+  [[ $ROOTPATH = "x" ]] && ROOTPATH="/home/project/QuickMinecraftServer/src"
+  unset tmp
+fi
+source ${ROOTPATH}usr/quickmcs/lib/quickmcslib
 
 
 function loadOptions(){
