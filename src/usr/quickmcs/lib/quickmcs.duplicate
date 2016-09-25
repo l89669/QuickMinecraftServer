@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function loadOptions(){
+return 0
+}
+
+function main(){
+echo "No more to do."
+}
+
+
+main
+
+
+exit 0
+
+
+

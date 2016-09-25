@@ -1,0 +1,93 @@
+#included in lib/quickmcs.common
+handleError(){
+local errLvl=$1
+local errMsg=$2
+echo -e "$errMsg\c"
+case $errLvl in
+  0 )
+    echo
+    return 0
+;;  
+  -1 )
+    echo ". [This info is only for debug]"
+;;
+  else )
+    echo ". Programe will now exit."
+    exit $errLvl
+;;
+esac	
+}
+
+
+#included in lib/quickmcs.util
+_getInstanceName(){
+[[  "x$serverType" = "x" ]] && local serverType=
+local i=1
+local insName="${serverType}_ins${i}"
+for [[ $i < 100 ]]; do
+  if [[ -d ./$insName ]]; then
+    let i=i+1
+  else
+    insName="${serverType}_ins${i}"
+	echo $insName
+	return 0
+  fi
+done
+insName=
+return 1
+}
+
+
+#included in lib/quickmcs.common
+loadVars(){
+rootPath=
+libPath="${rootPath}/usr/quickmcs/lib/"
+serverPath="${rootPath}/usr/quickmcs/server/"
+localPath="${PWD}/"
+
+[[  "x${serverType}" = "x" ]] && serverType="craftbukkit"
+[[  "x${instanceName}" = "x" ]] && instanceName=`_getInstanceName`
+serverPort=
+playerNumber=
+}
+
+
+#included in lib/quickmcs.common
+loadArgs(){
+
+}
+
+
+#included in lib/quickmcs.common
+readConfig(){
+
+}
+
+
+#included in lib/quickmcs.util
+_getConfigINI(){
+
+}
+
+
+#included in lib/quickmcs.install
+copyImage(){
+
+}
+
+
+#included in lib/quickmcs.install
+installServer(){
+copyImage
+
+}
+
+
+#included in main
+main(){
+loadVars
+loadArgs
+readConfig
+
+
+}
