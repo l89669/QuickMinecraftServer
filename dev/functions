@@ -41,8 +41,86 @@ return 1
 
 
 #included in lib/quickmcs.common
+function loadArgs(){
+local i=0
+local arg=()
+local arg1=
+local arg2=
+local run=
+local _tmp=
+rootPath=$(eval echo ${arg[$i]} | sed 's/\/bin\/quickmcs//g')
+let i=i+1
+for i in 0 1 2 3 4 5 6 7 8 9; do
+  arg[$i]=$(eval echo \$$i | sed 's/-//g')
+  arg1=$(eval echo ${arg[$i]} | awk -F '=' '{print $1}')
+  if [[ ${arg1} = "motd" ]]
+  then
+    _tmp=$(eval echo ${arg[$i]} | sed 's/&/§/g' | awk -F '=' '{print $2}')
+	arg2=$(echo "\"${_tmp}\"")
+  else
+    arg2=$(eval echo ${arg[$i]} | awk -F '=' '{print $2}')
+  fi
+  #echo "${arg[$i]} $arg1 $arg2"
+  case $arg1 in
+  "name" | "server" | "port" | "online_mode" | "player_number" )
+	  if [[ "x$arg2" = "x" ]]
+	  then
+	    echo "[ERROR] No value for ${arg1}\!"
+	  else
+	    eval ${arg[$i]}
+	    echo "[DEBUG] ${arg[$i]}"
+	  fi
+  ;;
+  "motd" )
+	if [[ "x$arg2" = "x" ]]
+	then
+	  echo "[ERROR] No value for ${arg1}\!"
+	else
+	  eval ${arg1}=${arg2}
+	  echo "[DEBUG] ${arg[$i]}"
+	fi
+  ;;
+  "" )
+    echo -e "\c"
+  ;;
+  * )
+	echo "[ERROR] Invalid argument -${arg[$i]}"
+  ;;
+  esac
+  let  i=i+1
+done
+}
+
+
+#loadArgs -name=anexample -server=example -port=25565 -online_mode=false -player_number=50 -motd="A Minecraft Server"
+#loadArgs $0 $*
+
+
+#DEBUG
+showArgs(){
+echo name=$name
+echo server=$server
+echo port=$port
+echo online_mode=$online_mode
+echo player_number=$player_number
+echo motd=$motd
+}
+
+
+#DEBUG
+unsetArgs(){
+unset name
+unset server
+unset port
+unset online_mode
+unset player_number
+unset motd
+}
+
+
+#included in lib/quickmcs.common
 loadVars(){
-rootPath=
+rootPath=$(echo $0 | sed sed 's/\/bin\/quickmcs//g' )
 libPath="${rootPath}/usr/quickmcs/lib/"
 serverPath="${rootPath}/usr/quickmcs/server/"
 localPath="${PWD}/"
