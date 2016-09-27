@@ -1,3 +1,5 @@
+#!/bin/env bash
+
 #included in lib/quickmcs.common
 handleError(){
 local errLvl=$1
@@ -70,8 +72,8 @@ _getConfigINI(){
 }
 
 
-#included in lib/quickmcs.install
-copyImage(){
+#included in lib/quickmcs.util
+_getConfigYAML(){
 
 }
 
@@ -91,3 +93,28 @@ readConfig
 
 
 }
+
+#included in /lib/quickmcs.installServer
+loadServerConfig(){
+[[ "x$serverName" = "x" ]] && handleError 3 "ServerName not set"
+serverConfPath="${rootPath}/servers/${serverName}/${serverName}.conf"
+if [[ -f $serverConfPath ]]; then
+  # read Config for server
+else
+  handleError 3 "Server $serverName not found in local storage"
+fi
+}
+
+
+#included in /lib/quickmcs.installServer
+copyImage(){
+
+}
+
+
+#included in /lib/quickmcs.installServer
+configServer(){
+
+}
+
+
